@@ -1,7 +1,10 @@
 export const ADD_BOOK = 'ADD_BOOK';
 export const DELETE_BOOK = 'DELETE_BOOK';
 export const UPDATE_BOOK = 'UPDATE_BOOK';
+
 export const ADD_BOOK_TO_CART = 'ADD_BOOK_TO_CART';
 export const DELETE_BOOK_FROM_CART = 'DELETE_BOOK_FROM_CART';
 export const DELETE_ALL_FROM_CART = 'DELETE_ALL_FROM_CART';
 export const UPDATE_BOOK_FROM_CART = 'UPDATE_BOOK_FROM_CART';
+
+export const GET_BOOKS = 'GET_ALL_BOOKS';
