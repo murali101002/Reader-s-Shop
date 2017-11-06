@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
 
 class App extends Component {
   render() {
+    console.log('books', this.props.books);
     return (
       <div className="App">
       </div>
@@ -11,4 +12,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state=>{
+  return {
+    books: state.book
+  };
+}
+export default connect(mapStateToProps)(App);
