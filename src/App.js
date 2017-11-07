@@ -6,6 +6,7 @@ import { getBooks } from './actions/bookActions';
 import { Grid, Col, Row } from 'react-bootstrap';
 import BookList from './components/BookList';
 import BookForm from './components/bookForm';
+import Cart from './components/cart';
 
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
   render() {
     return (
       <Grid className="App">
+        <Cart />
         <Col xs={12} sm={6}>
           <BookForm />
         </Col>

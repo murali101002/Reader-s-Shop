@@ -8,8 +8,9 @@ class BookList extends Component {
       <div>
         {
           this.props.books.map(book =>
-            <Col xs={12} sm={6} md={4} key={book.id}>
+            <Col xs={12} sm={6} md={4} key={book._id}>
               <BookItem 
+                _id={book._id}
                 price={book.price}
                 title={book.title}
                 description={book.description}
