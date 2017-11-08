@@ -1,10 +1,16 @@
 import React from 'react';
-import { Well, Panel, Col, Row, Button, Label, ButtonGroup } from 'react-bootstrap';
+import { Panel, Col, Row, Button, Label, ButtonGroup, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteBookFromCart, updateBookInCart } from '../actions/cartActions';
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    }
+  }
   render() {
     if (this.props.cart.length > 0) return this.renderCart();
     return this.renderEmpty();
@@ -17,14 +23,19 @@ class Cart extends React.Component {
     this.props.updateBookInCart({ ...book, qty: ++book.qty, price: book.price / (book.qty - 1) + book.price });
   }
   decrementQty(book) {
-    const bookPrice = book.price;
     if (book.qty > 1) {
       this.props.updateBookInCart({ ...book, qty: --book.qty, price: book.price - book.price / (book.qty + 1) });
     }
   }
-  totalCartPrice(){
-    const total = this.props.cart.map(book=>+book.price).reduce((sum,value)=>sum+value);
-    return Math.round(total*100)/100;
+  // totalCartPrice() {
+  //   const total = this.props.cart.map(book => +book.price).reduce((sum, value) => sum + value);
+  //   return Math.round(total * 100) / 100;
+  // }
+  open() {
+    this.setState({ showModal: true });
+  }
+  close() {
+    this.setState({ showModal: false });
   }
   renderCart() {
     const cartItemList = this.props.cart.map(book => {
@@ -58,10 +69,21 @@ class Cart extends React.Component {
         {cartItemList}
         <Row>
           <Col xs={12}>
-            <h6>Total Amount: {Math.round(this.props.cart.map(book=>book.price).reduce((sum,value)=>sum+value)*100)/100}</h6>
-            <Button bsStyle="success">Checkout</Button>
+            <h6>Total Amount: {Math.round(this.props.cart.map(book => book.price).reduce((sum, value) => sum + value) * 100) / 100}</h6>
+            <Button onClick={this.open.bind(this)} bsStyle="success">Checkout</Button>
           </Col>
         </Row>
+        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Test
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close.bind(this)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </Panel>
     );
   }

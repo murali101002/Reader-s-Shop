@@ -24,18 +24,19 @@ export const bookReducer = (state = {
   ]
 }, action) => {
   let booksInStore = state.books;
+  console.log('books', state);
   switch (action.type) {
     case GET_BOOKS:
-      return {...state, books:[...state.books]};
+      return { ...state, books: [...state.books] };
     case ADD_BOOK:
       return {
         books: [...state.books, ...action.books]
       };
     case DELETE_BOOK:
       if (booksInStore.length > 0) {
-        let bookToDelete_Id = booksInStore.findIndex(book => book._id === action._id);
+        let bookToDelete_Id = booksInStore.findIndex(book => book._id.toString()   === action.id);
         return {
-          books: [...booksInStore.slice(0, bookToDelete_Id), ...booksInStore.splice(bookToDelete_Id + 1)]
+          books: [...booksInStore.slice(0, bookToDelete_Id), ...booksInStore.slice(bookToDelete_Id + 1)]
         };
       }
       return state;
@@ -43,7 +44,7 @@ export const bookReducer = (state = {
       if (booksInStore.length > 0) {
         const bookToUpdate_Id = booksInStore.findIndex(book => book._id === action.book._id);
         return {
-          books: [...booksInStore.slice(0, bookToUpdate_Id), action.book, ...booksInStore.splice(bookToUpdate_Id + 1)]
+          books: [...booksInStore.slice(0, bookToUpdate_Id), action.book, ...booksInStore.slice(bookToUpdate_Id + 1)]
         };
       }
       return state;
