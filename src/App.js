@@ -8,7 +8,6 @@ import BookList from './components/BookList';
 import BookForm from './components/bookForm';
 import Cart from './components/cart';
 
-
 class App extends Component {
   componentDidMount() {
     this.props.getBooks();

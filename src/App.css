@@ -2,6 +2,37 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.container{
+  width: auto;
+  max-width: 900px;
+  min-height: 100%;
+  padding: 0 15px;
+}
+
+.container .footer-text{
+  margin: 20px 0;
+  position: relative;
+}
+
+/* .footer{
+  max-height: 50px;
+  position: absolute;
+  background-color: black;
+  color: gray;
+  width:100%;
+  bottom: 0px;
+} */
+
+.badge{
+  background-color: cornsilk;
+  color: black;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
