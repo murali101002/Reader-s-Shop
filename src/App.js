@@ -15,10 +15,6 @@ class App extends Component {
   render() {
     return (
       <Grid className="App">
-        <Cart />
-        <Col xs={12} sm={6}>
-          <BookForm />
-        </Col>
         <Col>
           <Row style={{ marginTop: '15px' }}>
             <BookList books={this.props.books} />

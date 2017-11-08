@@ -16,15 +16,17 @@ class Cart extends React.Component {
     return this.renderEmpty();
   }
   deleteBook(_id) {
-    this.props.deleteBookFromCart(_id);
+    const booksInCart = this.props.cart;
+    const bookToDeleteIndex = booksInCart.findIndex(book=>book._id==_id);
+    let updatedCart = [...booksInCart.slice(0, bookToDeleteIndex), ...booksInCart.slice(bookToDeleteIndex+1)];
+    this.props.deleteBookFromCart(updatedCart);
   }
   incrementQty(book) {
-    const bookPrice = book.price;
-    this.props.updateBookInCart({ ...book, qty: ++book.qty, price: book.price / (book.qty - 1) + book.price });
+    this.props.updateBookInCart(book._id, 1, this.props.cart);
   }
   decrementQty(book) {
     if (book.qty > 1) {
-      this.props.updateBookInCart({ ...book, qty: --book.qty, price: book.price - book.price / (book.qty + 1) });
+      this.props.updateBookInCart(book._id, -1, this.props.cart);
     }
   }
   // totalCartPrice() {
@@ -69,7 +71,7 @@ class Cart extends React.Component {
         {cartItemList}
         <Row>
           <Col xs={12}>
-            <h6>Total Amount: {Math.round(this.props.cart.map(book => book.price).reduce((sum, value) => sum + value) * 100) / 100}</h6>
+            <h6>Total Amount: {this.props.totalAmount}</h6>
             <Button onClick={this.open.bind(this)} bsStyle="success">Checkout</Button>
           </Col>
         </Row>
@@ -93,7 +95,8 @@ class Cart extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    totalAmount: state.cart.totalAmount
   }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,24 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import reducers from './reducers';
-import Menu from './components/menu';
-import Footer from './components/footer';
+import {Router, Route, browserHistory, IndexRoute} from 'react-router';
+import Main from './components/main';
+import App from './App';
+import BookForm from './components/bookForm';
+import Cart from './components/cart';
 
 const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
+const Routes = (
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path='/' component={Main}>
+        <IndexRoute component={App} />
+        <Route path='/admin' component={BookForm} />
+        <Route path='/cart' component={Cart} />
+      </Route>
+    </Router>
+    {/* <div>
+      <Main />
+    </div> */}
+  </Provider>
+);
+
 ReactDOM.render(
-<Provider store={store}>
-  <div id="container">
-    <Menu />
-    <App />
-    <Footer />
-  </div>
-</Provider>, document.getElementById('root'));
+  Routes, document.getElementById('root'));
 registerServiceWorker();

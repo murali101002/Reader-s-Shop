@@ -8,10 +8,10 @@ export const addBookToCart = book=>{
   return action;
 }
 
-export const deleteBookFromCart = _id=>{
+export const deleteBookFromCart = cart=>{
   const action = {
     type: DELETE_BOOK_FROM_CART,
-    _id
+    cart
   }
   return action;
 }
@@ -23,10 +23,14 @@ export const getAllBooksFromCart = ()=>{
   return action;
 }
 
-export const updateBookInCart = book=>{
+export const updateBookInCart = (_id, val, cart)=>{
+  const bookToUpdate_id = cart.findIndex(book => book._id === _id);
+  const updatedBook = {
+    ...cart[bookToUpdate_id], qty:cart[bookToUpdate_id].qty+1
+  }
   const action = {
     type: UPDATE_BOOK_IN_CART,
-    book
+    cart: [...cart.slice(0, bookToUpdate_id), updatedBook, ...cart.slice(bookToUpdate_id+1)]
   }
   return action;
 }

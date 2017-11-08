@@ -24,7 +24,6 @@ export const bookReducer = (state = {
   ]
 }, action) => {
   let booksInStore = state.books;
-  console.log('books', state);
   switch (action.type) {
     case GET_BOOKS:
       return { ...state, books: [...state.books] };

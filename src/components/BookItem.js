@@ -6,7 +6,7 @@ import {addBookToCart, getAllBooksFromCart} from '../actions/cartActions';
 
 class BookItem extends React.Component {
   purchaseBook(){
-    const book = [{
+    const book = [...this.props.cart, {
       qty: 1,
       _id: this.props._id,
       title: this.props.title,

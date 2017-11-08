@@ -4,18 +4,35 @@ export const cartReducer = (state = { cart: [] }, action) => {
   const booksInCart = [...state.cart];
   switch (action.type) {
     case ADD_BOOK_TO_CART:
-      return { cart: [...state.cart, ...action.book] };
+      return { 
+        cart: action.book,
+        totalAmount: totals(action.book).amount,
+        totalQty: totals(action.book).quantity
+       };
     case DELETE_BOOK_FROM_CART:
-      const bookToDelete_id = booksInCart.findIndex(book => book._id === action._id);
       return {
-        cart: [...booksInCart.slice(0, bookToDelete_id), ...booksInCart.slice(bookToDelete_id + 1)]
+        cart: action.cart,
+        totalAmount: totals(action.cart).amount,
+        totalQty: totals(action.cart).quantity
       };
     case UPDATE_BOOK_IN_CART:
-      const bookToUpdate_id = booksInCart.findIndex(book=>book._id === action.book._id);
-      return {cart:[...booksInCart.slice(0,bookToUpdate_id), action.book, ...booksInCart.slice(bookToUpdate_id+1)]};
-
+      return { 
+        cart: action.cart,
+        totalAmount: totals(action.cart).amount,
+        totalQty: totals(action.cart).quantity
+       };
+    case GET_ALL_BOOKS_FROM_CART:
+      return { ...state, cart: [...state.cart] };
     default:
       return state;
   }
 }
 
+function totals(cart){
+  const amount = cart.map(book=>book.price*book.qty).reduce((sum, value)=>sum+value, 0);
+  const quantity = cart.map(book=>book.qty).reduce((sum, value)=>sum+value, 0);
+  return {
+    amount: amount.toFixed(2),
+    quantity
+  }
+}
