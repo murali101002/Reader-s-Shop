@@ -49799,7 +49799,7 @@ exports = module.exports = __webpack_require__(116)(undefined);
 
 
 // module
-exports.push([module.i, ".App {\n  font-family: 'Roboto', sans-serif;\n}\n\nbody{\n  margin-top: 50px;\n  margin-bottom: 50px;\n}\n\n.container{\n  width: auto;\n  max-width: 900px;\n  min-height: 100%;\n  padding: 0 15px;\n}\n\n.container .footer-text{\n  margin: 20px 0;\n  position: relative;\n}\n\n.badge{\n  background-color: cornsilk;\n  color: black;\n}\n\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px;\n}\n\n.App-header {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white;\n}\n\n.App-title {\n  font-size: 1.5em;\n}\n\n.App-intro {\n  font-size: large;\n}\n\n", ""]);
+exports.push([module.i, ".App {\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\nbody{\r\n  margin-top: 50px;\r\n  margin-bottom: 50px;\r\n}\r\n\r\n.container{\r\n  width: auto;\r\n  max-width: 900px;\r\n  min-height: 100%;\r\n  padding: 0 15px;\r\n}\r\n\r\n.container .footer-text{\r\n  margin: 20px 0;\r\n  position: relative;\r\n}\r\n\r\n.badge{\r\n  background-color: cornsilk;\r\n  color: black;\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  background-color: #222;\r\n  height: 150px;\r\n  padding: 20px;\r\n  color: white;\r\n}\r\n\r\n.App-title {\r\n  font-size: 1.5em;\r\n}\r\n\r\n.App-intro {\r\n  font-size: large;\r\n}\r\n\r\n", ""]);
 
 // exports
 
