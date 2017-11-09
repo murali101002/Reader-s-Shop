@@ -24,9 +24,6 @@ const Routes = (
         <Route path='/cart' component={Cart} />
       </Route>
     </Router>
-    {/* <div>
-      <Main />
-    </div> */}
   </Provider>
 );
 

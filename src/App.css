@@ -19,15 +19,6 @@ body{
   position: relative;
 }
 
-/* .footer{
-  max-height: 50px;
-  position: absolute;
-  background-color: black;
-  color: gray;
-  width:100%;
-  bottom: 0px;
-} */
-
 .badge{
   background-color: cornsilk;
   color: black;
@@ -53,7 +44,3 @@ body{
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
