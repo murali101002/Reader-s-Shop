@@ -5,9 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -45,6 +42,33 @@ app.get('/books', (req, res)=>{
     if(err){
       throw err;
     }
+    res.json(books);
+  })
+})
+
+app.put('/books/:_id', (req, res)=>{
+  var book = req.body;
+  var params = req.params._id;
+  var update = {
+    '$set':{
+      title: book.title,
+      description: book.description,
+      image: book.image,
+      price: book.price,
+      upsert: true
+    }
+  };
+  var options = {new:true};
+  Books.findOneAndUpdate(params, update, options, (err, books)=>{
+    if(err) throw err;
+    res.json(books);
+  })
+})
+
+app.delete('/books/:_id', (req, res)=>{
+  var params = req.params._id;
+  Books.remove({_id:params}, (err, books)=>{
+    if(err) throw err;
     res.json(books);
   })
 })

@@ -5,33 +5,43 @@ export const addBook = books => {
   return function (dispatch) {
     axios.post('/books', books)
       .then(response => {
-        dispatch({ type: 'ADD_BOOK', payload: response.body })
+        dispatch({ type: ADD_BOOK, books: response.data })
       })
       .catch(error => {
-        dispatch({ type: 'ADD_BOOK_ERR', payload: 'Error in adding new book' })
+        dispatch({ type: ADD_BOOK_ERR, payload: 'Error in adding new book' })
       })
   }
 }
 
 export const deleteBook = id => {
-  const action = {
-    type: DELETE_BOOK,
-    id
+  return dispatch=>{
+    axios.delete('/books/'+id)
+        .then(response=>{
+          dispatch({type: DELETE_BOOK, id: id});
+        })
+        .catch(error=>{
+          dispatch({type: DELETE_BOOK_ERR, error: 'There is an error in deleting the book'});
+        })
   }
-  return action;
 }
 
 export const updateBook = book => {
-  const action = {
-    type: UPDATE_BOOK,
-    book
+  return dispatch=>{
+    axios.put('/books', book)
+        .then(response=>{
+          dispatch({type: UPDATE_BOOK, id: id})
+        })
   }
-  return action;
 }
 
 export const getBooks = () => {
-  const action = {
-    type: GET_BOOKS
+  return dispatch=>{
+    axios.get('/books')
+          .then(response=>{
+            dispatch({type: GET_BOOKS, books: response.data}) 
+          })
+          .catch(error=>{
+            dispatch({type:GET_BOOKS_ERR, error:'There is an error in fetching the books'});
+          })
   }
-  return action;
 }

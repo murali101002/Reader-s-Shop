@@ -11,8 +11,9 @@ import Main from './components/main';
 import App from './App';
 import BookForm from './components/bookForm';
 import Cart from './components/cart';
+import thunk from 'redux-thunk';
 
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(thunk, logger);
 const store = createStore(reducers, middleware);
 
 const Routes = (

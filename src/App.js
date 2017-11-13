@@ -9,9 +9,6 @@ import BookForm from './components/bookForm';
 import Cart from './components/cart';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.getBooks();
-  }
   render() {
     return (
       <Grid className="App">

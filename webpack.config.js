@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public')
   },
   watch: true,
+  devtool: 'source-map',
   watchOptions: {
     poll: true
   },
