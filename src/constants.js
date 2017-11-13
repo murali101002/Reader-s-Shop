@@ -9,3 +9,5 @@ export const UPDATE_BOOK_IN_CART = 'UPDATE_BOOK_IN_CART';
 
 export const GET_BOOKS = 'GET_ALL_BOOKS';
 export const GET_ALL_BOOKS_FROM_CART = 'GET_ALL_BOOKS_FROM_CART';
+
+export const ADD_BOOK_ERR = 'ADD_BOOK_ERR';
