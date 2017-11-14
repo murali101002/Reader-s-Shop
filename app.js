@@ -1,9 +1,8 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
+var httpProxy = require('http-proxy');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -14,65 +13,17 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// APIs
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/bookShop');
-var Books = require('./models/books');
-
-// Create/Add books to DB using node POST method
-app.post('/books', (req, res)=>{
-  var book = req.body;
-  console.log('req',req.body);
-  Books.create(book, (err, books)=>{
-    if(err){
-      throw err;
-    }
-    res.json(books);
-  })
+// create a new server at the target
+const apiProxy = httpProxy.createProxyServer({
+  target: 'http://localhost:3001'
 });
 
-//GET list of books from the DB
-app.get('/books', (req, res)=>{
-  Books.find((err, books)=>{
-    if(err){
-      throw err;
-    }
-    res.json(books);
-  })
-})
-
-app.put('/books/:_id', (req, res)=>{
-  var book = req.body;
-  var params = req.params._id;
-  var update = {
-    '$set':{
-      title: book.title,
-      description: book.description,
-      image: book.image,
-      price: book.price,
-      upsert: true
-    }
-  };
-  var options = {new:true};
-  Books.findOneAndUpdate(params, update, options, (err, books)=>{
-    if(err) throw err;
-    res.json(books);
-  })
-})
-
-app.delete('/books/:_id', (req, res)=>{
-  var params = req.params._id;
-  Books.remove({_id:params}, (err, books)=>{
-    if(err) throw err;
-    res.json(books);
-  })
-})
-
+// all the requests at end point '/api' are intercepted and re-routed to proxy server (3001)
+app.use('/api', (req, res)=>{
+  apiProxy.web(req, res);
+});
 
 app.get('*', (req, res)=>{
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
