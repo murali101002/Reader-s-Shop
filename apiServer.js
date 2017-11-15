@@ -3,9 +3,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
+var session = require('express-session');
+var MongoStrore = require('connect-mongo')(session);
+
 var app = express();
-
-
 
 
 // view engine setup
@@ -22,6 +23,38 @@ app.use(cookieParser());
 // APIs
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookShop');
+var db = mongoose.connection;
+/*===START SESSION===*/
+app.use(session({
+  secret: 'secretString',
+  saveUninitialized: false,
+  resave: false,
+  cookie: {maxAge: 1000*60*60*24*2},
+  store: new MongoStrore({
+    mongooseConnection:db,
+    ttl: 2*24*60*60
+  })
+}));
+
+// save cart session
+app.post('/cart', (req, res)=>{
+  req.session.cart = req.body;
+  req.session.save(err=>{
+    if(err) throw err;
+    res.json(req.session.cart);
+  })
+});
+
+// get saved cart session
+app.get('/cart', (req, res)=>{
+  console.log('cart', req.session.cart);
+  if(typeof req.session.cart!=='undefined'){
+    res.json(req.session.cart);
+  }
+})
+/*===END SESSION===*/
+
+
 var Books = require('./models/books');
 
 // Create/Add books to DB using node POST method
@@ -71,7 +104,22 @@ app.delete('/books/:_id', (req, res)=>{
     if(err) throw err;
     res.json(books);
   })
-})
+});
+
+//Images API call
+app.get('/images', (req, res)=>{
+  const fs = require('fs');
+  const imgDir = __dirname + '/public/images/';
+  let images = [];
+  fs.readdir(imgDir, (err, files)=>{
+    if(err) console.log('Error in reading the files');
+    files.forEach(file=>{
+      images.push({name:file});
+    });
+    console.log('image ', images);
+    res.json(images);
+  })
+});
 // END API
 
 

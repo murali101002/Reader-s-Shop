@@ -2,9 +2,12 @@ import React from 'react';
 import { Panel, Col, Row, Button, Label, ButtonGroup, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteBookFromCart, updateBookInCart } from '../actions/cartActions';
+import { deleteBookFromCart, updateBookInCart, getAllBooksFromCart } from '../actions/cartActions';
 
 class Cart extends React.Component {
+  componentDidMount(){
+    this.props.getAllBooksFromCart();
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -29,10 +32,6 @@ class Cart extends React.Component {
       this.props.updateBookInCart(book._id, -1, this.props.cart);
     }
   }
-  // totalCartPrice() {
-  //   const total = this.props.cart.map(book => +book.price).reduce((sum, value) => sum + value);
-  //   return Math.round(total * 100) / 100;
-  // }
   open() {
     this.setState({ showModal: true });
   }
@@ -100,6 +99,6 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ deleteBookFromCart, updateBookInCart }, dispatch);
+  return bindActionCreators({ deleteBookFromCart, updateBookInCart, getAllBooksFromCart }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

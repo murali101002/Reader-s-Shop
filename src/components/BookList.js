@@ -14,6 +14,7 @@ class BookList extends Component {
                 price={book.price}
                 title={book.title}
                 description={book.description}
+                image={book.image}
               />
             </Col>
           )

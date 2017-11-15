@@ -1,5 +1,5 @@
 import React from 'react';
-import { Well, Col, Row, Button } from 'react-bootstrap';
+import { Well, Col, Row, Button, Image } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addBookToCart, getAllBooksFromCart} from '../actions/cartActions';
@@ -25,7 +25,10 @@ class BookItem extends React.Component {
     return (
       <Well>
         <Row>
-          <Col xs={12}>
+          <Col xs={12} sm={6}>
+            <Image src={this.props.image} responsive rounded/>
+          </Col>
+          <Col xs={12} sm={6}>
             <h6>{this.props.title}</h6>
             <p>{this.props.description}</p>
             <h6>{this.props.price}</h6>
