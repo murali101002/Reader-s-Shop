@@ -1,4 +1,4 @@
-import { ADD_BOOK, DELETE_BOOK, UPDATE_BOOK, GET_BOOKS, ADD_BOOK_ERR, GET_BOOKS_ERR } from '../constants';
+import { ADD_BOOK, DELETE_BOOK, RESET_ADD_BOOK_BUTTON, UPDATE_BOOK, GET_BOOKS, ADD_BOOK_ERR, GET_BOOKS_ERR } from '../constants';
 import axios from 'axios';
 
 export const addBook = books => {
@@ -43,5 +43,11 @@ export const getBooks = () => {
           .catch(error=>{
             dispatch({type:GET_BOOKS_ERR, error:'There is an error in fetching the books'});
           })
+  }
+}
+
+export const resetButton = ()=>{
+  return {
+    type: RESET_ADD_BOOK_BUTTON
   }
 }

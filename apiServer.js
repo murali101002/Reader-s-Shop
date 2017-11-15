@@ -107,9 +107,9 @@ app.delete('/books/:_id', (req, res)=>{
 });
 
 //Images API call
-app.get('/images', (req, res)=>{
+app.get('/images/books', (req, res)=>{
   const fs = require('fs');
-  const imgDir = __dirname + '/public/images/';
+  const imgDir = __dirname + '/public/images/books/';
   let images = [];
   fs.readdir(imgDir, (err, files)=>{
     if(err) console.log('Error in reading the files');

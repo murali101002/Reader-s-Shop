@@ -2,7 +2,7 @@ import React from 'react';
 import { Well, Row, Col, FormControl, Image, ControlLabel, Panel, Button, FormGroup, InputGroup, DropdownButton, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addBook, deleteBook } from '../actions/bookActions';
+import { addBook, deleteBook, resetButton } from '../actions/bookActions';
 import axios from 'axios';
 import '../App.css';
 
@@ -15,7 +15,7 @@ class BookForm extends React.Component {
     }
   }
   componentDidMount() {
-    axios.get('/api/images')
+    axios.get('/api/images/books/')
       .then(response => {
         this.setState({ images: response.data });
       })
@@ -25,7 +25,7 @@ class BookForm extends React.Component {
   }
 
   selectItemFromList = imageName=>{
-    this.setState({imgUrl:'/images/'+imageName})
+    this.setState({imgUrl:'/images/books/'+imageName})
   }
 
   handleSubmit() {
@@ -36,15 +36,22 @@ class BookForm extends React.Component {
     const book = [{ title, description, price, image }];
     this.props.addBook(book);
   }
+  resetForm(){
+    this._title.value = '';
+    this._description.value = '';
+    this._price.value = '';
+    this.setState({imgUrl:''});
+    this.props.resetButton();
+  }
   onDeleteItem = () => {
     const id = this._select.value;
     this.props.deleteBook(id);
   }
   render() {
-    const optionList = this.props.books.map(book => {
+    const optionList = this.props.books.books.map(book => {
       return (
         <option key={book._id}>
-          {book._id}
+          {book.title}
         </option>
       );
     })
@@ -105,9 +112,12 @@ class BookForm extends React.Component {
                 />
               </FormGroup>
               <Button
-                bsStyle='primary'
-                onClick={this.handleSubmit.bind(this)}
-              >Add Book</Button>
+                bsStyle={(!this.props.books.msg)?'primary':(this.props.books.style)}
+                onClick={
+                  (!this.props.books.msg)?(this.handleSubmit.bind(this)):
+                                          this.props.books.style==='success'?(this.resetForm.bind(this)):''
+                }>
+              { (!this.props.books.msg)?'Add Book':this.props.books.msg }</Button>
             </Panel>
             <Panel>
               <FormGroup controlId="formControlsSelectMultiple">
@@ -125,11 +135,11 @@ class BookForm extends React.Component {
   }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ addBook, deleteBook }, dispatch);
+  return bindActionCreators({ addBook, deleteBook, resetButton }, dispatch);
 }
 const mapStateToProps = state => {
   return {
-    books: state.book.books
+    books: state.book
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BookForm);
