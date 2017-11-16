@@ -25,10 +25,11 @@ const apiProxy = httpProxy.createProxyServer({
 // all the requests at end point '/api' are intercepted and re-routed to proxy server (3001)
 app.use('/api', (req, res)=>{
   apiProxy.web(req, res);
+  console.log('req body', req.body);
 });
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(requestHandler);

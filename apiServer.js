@@ -116,7 +116,6 @@ app.get('/images/books', (req, res)=>{
     files.forEach(file=>{
       images.push({name:file});
     });
-    console.log('image ', images);
     res.json(images);
   })
 });
