@@ -1,6 +1,9 @@
 require('babel-core/register')({
   "presets":["es2015", "react", "stage-1"]
-})
+});
+require.extensions['.css'] = () => {
+  return;
+};
 
 var express = require('express');
 var path = require('path');

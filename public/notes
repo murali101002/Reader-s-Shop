@@ -1,0 +1,6 @@
+EJS:
+-This templating engine is used to give a feel that app loads faster.
+-When the base url was requested, we create a client store object from server store object
+-We also fetch the static pages and their route paths from server to client
+-We then render this initial data along with static mark up to the client in index.EJS
+-Even the javascript is disabled on the browser, the static HTML markups and data of the application gets rendered

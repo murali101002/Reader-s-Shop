@@ -5,17 +5,15 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import reducers from './src/reducers';
-import routes from './routes';
+import routes from './src/routes';
 
 function requestHandler(req, res) {
-  axios.get('http://localhost:3000/api/books')
+  axios.get('http://localhost:3001/books')
     .then(response => {
-      console.log('response', response);
       // create a client redux store object to fetch the initial data from server redux store
       const store = createStore(reducers, { "book": { "books": response.data } });
       // preventing script injection when stringifying the server response
       const initialState = JSON.stringify(store.getState()).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
-      console.log('initialState', initialState);
       const Routes = {
         routes,
         location: req.url
@@ -31,11 +29,10 @@ function requestHandler(req, res) {
               <RouterContext {...props} />
             </Provider>
           );
-          res.status(200).render('index', {reactComponent, initialState});
-        }else{
+          res.status(200).render('index', { reactComponent, initialState });
+        } else {
           res.status(404).send('Not Found');
         }
-
       })
 
 
