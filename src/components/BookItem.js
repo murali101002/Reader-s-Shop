@@ -51,7 +51,7 @@ class BookItem extends React.Component {
               }
               <button className="link" onClick={this.onReadMore.bind(this)}>
                 {
-                  (this.props.description.length > 50 && this.state.isClicked === false) ? ('...readMore') : ('')
+                  (this.props.description.length > 50 && this.state.isClicked === false) ? ('...readMore') : ('...less')
                 }
               </button>
             </p>
