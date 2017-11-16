@@ -1,14 +1,16 @@
+require('babel-core/register')({
+  "presets":["es2015", "react", "stage-1"]
+})
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var httpProxy = require('http-proxy');
 var logger = require('morgan');
+var requestHandler = require('./requestHandler'); 
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -25,9 +27,12 @@ app.use('/api', (req, res)=>{
   apiProxy.web(req, res);
 });
 
-app.get('*', (req, res)=>{
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-})
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(requestHandler);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
