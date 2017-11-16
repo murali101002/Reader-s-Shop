@@ -49187,7 +49187,7 @@ exports = module.exports = __webpack_require__(121)(undefined);
 
 
 // module
-exports.push([module.i, ".App {\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\nbody{\r\n  margin-top: 50px;\r\n  margin-bottom: 50px;\r\n}\r\n\r\n.container{\r\n  width: auto;\r\n  max-width: 900px;\r\n  min-height: 100%;\r\n  padding: 0 15px;\r\n}\r\n\r\n.container .footer-text{\r\n  margin: 20px 0;\r\n  position: relative;\r\n}\r\n\r\n.badge{\r\n  background-color: cornsilk;\r\n  color: black;\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  background-color: #222;\r\n  height: 150px;\r\n  padding: 20px;\r\n  color: white;\r\n}\r\n\r\n.App-title {\r\n  font-size: 1.5em;\r\n}\r\n\r\n.App-intro {\r\n  font-size: large;\r\n}\r\n\r\n.book-img{\r\n  height: 400px;\r\n  width: 100%;\r\n}\r\n\r\n.link{\r\n  background:none!important;\r\n  border:none; \r\n  padding:0!important;\r\n  text-decoration:underline;\r\n  cursor:pointer;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, ".App {\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\nbody{\r\n  margin-top: 50px;\r\n  margin-bottom: 50px;\r\n}\r\n\r\n.container{\r\n  width: auto;\r\n  max-width: 900px;\r\n  min-height: 100%;\r\n  padding: 0 15px;\r\n}\r\n\r\n.container .footer-text{\r\n  margin: 20px 0;\r\n  position: relative;\r\n}\r\n\r\n.badge{\r\n  background-color: cornsilk;\r\n  color: black;\r\n}\r\n\r\n.App-logo {\r\n  animation: App-logo-spin infinite 20s linear;\r\n  height: 80px;\r\n}\r\n\r\n.App-header {\r\n  background-color: #222;\r\n  height: 150px;\r\n  padding: 20px;\r\n  color: white;\r\n}\r\n\r\n.App-title {\r\n  font-size: 1.5em;\r\n}\r\n\r\n.App-intro {\r\n  font-size: large;\r\n}\r\n\r\n.book-img{\r\n  height: 400px;\r\n  width: 100%;\r\n}\r\n\r\n.link{\r\n  background:none!important;\r\n  border:none; \r\n  padding:0!important;\r\n  color: #ffffff;\r\n  cursor:pointer;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -49408,7 +49408,7 @@ var BookItem = function (_React$Component) {
               _react2.default.createElement(
                 'button',
                 { className: 'link', onClick: this.onReadMore.bind(this) },
-                this.props.description.length > 50 && this.state.isClicked === false ? '...readMore' : ''
+                this.props.description.length > 50 && this.state.isClicked === false ? '...readMore' : '...less'
               )
             ),
             _react2.default.createElement(
