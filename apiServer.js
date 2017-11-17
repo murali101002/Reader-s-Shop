@@ -25,7 +25,7 @@ var mongoose = require('mongoose');
 // Local DB
 // mongoose.connect('mongodb://localhost:27017/bookShop');
 // mLab DB
-mongoose.connect('mongodb://murali:1234@ds111336.mlab.com:11336/book-shop');
+mongoose.connect(<Your mlab db uri>);
 var db = mongoose.connection;
 /*===START SESSION===*/
 app.use(session({
