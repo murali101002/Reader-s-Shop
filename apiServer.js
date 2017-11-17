@@ -22,7 +22,10 @@ app.use(cookieParser());
 
 // APIs
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/bookShop');
+// Local DB
+// mongoose.connect('mongodb://localhost:27017/bookShop');
+// mLab DB
+mongoose.connect('mongodb://murali:1234@ds111336.mlab.com:11336/book-shop');
 var db = mongoose.connection;
 /*===START SESSION===*/
 app.use(session({
